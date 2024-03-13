@@ -19,6 +19,6 @@ public class SparkWebServerTest {
 
     @Test
     public void portGetCorrect(){
-        assertEquals(SparkWebServer.getPort(), 4567);
+        assertEquals(SparkWebServer.getPort(), 8080);
     }
 }

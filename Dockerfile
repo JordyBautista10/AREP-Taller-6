@@ -2,7 +2,7 @@ FROM openjdk:17
 
 WORKDIR /usrapp/bin
 
-ENV PORT 4567
+ENV PORT 8080
 
 COPY /target/classes /usrapp/bin/classes
 COPY /target/dependency /usrapp/bin/dependency

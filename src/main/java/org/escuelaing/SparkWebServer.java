@@ -1,5 +1,9 @@
 package org.escuelaing;
 
+import com.mongodb.client.MongoDatabase;
+import org.escuelaing.mongodb.LogDAO;
+import org.escuelaing.mongodb.MongoUtil;
+
 import static java.lang.Math.*;
 import static spark.Spark.port;
 import static spark.Spark.get;
@@ -11,6 +15,20 @@ public class SparkWebServer {
         port(getPort());
 
         staticFileLocation( "public");
+
+        MongoDatabase database = MongoUtil.getDatabase();
+        LogDAO logsDAO = new LogDAO(database);
+
+        // Create a new user
+        logsDAO.addLog("John Doe");
+
+        // List users
+        logsDAO.getLogs().forEach(log -> System.out.println(log.toJson()));
+
+        // Update user
+        logsDAO.addLog("Jordy");
+
+        logsDAO.getLogs().forEach(log -> System.out.println(log.toJson()));
 
         get("cliente", (req,res) -> {
             res.type("text/html");
@@ -42,6 +60,14 @@ public class SparkWebServer {
             return " La magnitud de (" + x + ", " + y +") es: " + sqrt( (x*x)  +(y*y));
         });
 
+        get("logs", (req,res) -> {
+            System.out.println("Legooooooooooo");
+            String x = req.queryParams("msg");
+            res.type("application/json");
+            logsDAO.addLog(x);
+            return /*"yes" ;*/ logsDAO.getLogs();
+        });
+
         after((request, response) -> {
             response.header("Access-Control-Allow-Origin", "*");
             response.header("Access-Control-Request-Method", "GET, POST, PUT, DELETE, OPTIONS");
@@ -54,7 +80,7 @@ public class SparkWebServer {
         if (System.getenv("PORT") != null) {
             return Integer.parseInt(System.getenv("PORT"));
         }
-        return 4567;
+        return 8080;
     }
 
     public static boolean palindromo(String word) {

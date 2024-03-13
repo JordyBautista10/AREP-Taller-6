@@ -6,7 +6,7 @@ function loadGetMsgSin() {
             document.getElementById("getrespmsg").innerHTML = this.responseText;
         }
     };
-    xhttp.open("GET", "http://localhost:4567/sin?id=" + x, true);
+    xhttp.open("GET", "http://localhost:8080/sin?id=" + x, true);
     xhttp.send();
 }
 
@@ -18,7 +18,7 @@ function loadGetMsgCos() {
             document.getElementById("getrespmsg2").innerHTML = this.responseText;
         }
     };
-    xhttp.open("GET", "http://localhost:4567/cos?id=" + x, true);
+    xhttp.open("GET", "http://localhost:8080/cos?id=" + x, true);
     xhttp.send();
 }
 
@@ -30,7 +30,7 @@ function loadGetMsgPalindrome() {
             document.getElementById("getrespmsg3").innerHTML = this.responseText;
         }
     };
-    xhttp.open("GET", "http://localhost:4567/palindromo?word=" + x, true);
+    xhttp.open("GET", "http://localhost:8080/palindromo?word=" + x, true);
     xhttp.send();
 }
 
@@ -43,6 +43,6 @@ function loadGetMsgMagnitud() {
             document.getElementById("getrespmsg4").innerHTML = this.responseText;
         }
     };
-    xhttp.open("GET", "http://localhost:4567/magnitud?x=" + nameVar1 + "&y=" + nameVar2, true);
+    xhttp.open("GET", "http://localhost:8080/magnitud?x=" + nameVar1 + "&y=" + nameVar2, true);
     xhttp.send();
 }

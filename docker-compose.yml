@@ -7,8 +7,10 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: web
+    environment:
+      - PORT=45000
     ports:
-      - "8087:46000"
+      - "8080:45000"
   db:
     image: mongo:3.6.1
     container_name: db
@@ -16,7 +18,7 @@ services:
       - mongodb:/data/db
       - mongodb_config:/data/configdb
     ports:
-      - 27017:27017
+      - "27017:27017"
     command: mongod
 
 volumes:
