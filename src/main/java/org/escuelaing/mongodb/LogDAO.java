@@ -29,7 +29,7 @@ public class LogDAO {
 
     public ArrayList<Document> getLogs() {
         FindIterable<Document> allLogs = logsFile.find();
-        ArrayList<Document> logsList = new ArrayList<Document>();
+        ArrayList<Document> logsList = new ArrayList<>();
         allLogs.forEach(logsList::add);
         return logsList;
     }
