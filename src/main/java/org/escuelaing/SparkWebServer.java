@@ -18,15 +18,13 @@ public class SparkWebServer {
         });
 
         get("sin", (req,res) -> {
-            String path = req.contextPath();
-            Float x = Float.parseFloat(req.queryParams("id"));
+            float x = Float.parseFloat(req.queryParams("id"));
             res.type("text/html");
             return "Sin(" + x + ") = " + sin(x);
         });
 
         get("cos", (req,res) -> {
-            String path = req.contextPath();
-            Float x = Float.parseFloat(req.queryParams("id"));
+            float x = Float.parseFloat(req.queryParams("id"));
             res.type("text/html");
             return "Cos(" + x + ") = " + cos(x);
         });
@@ -76,101 +74,102 @@ public class SparkWebServer {
     }
 
     public static String page(){
-        return "<html>\n" +
-                "    <head>\n" +
-                "        <title>Form Example</title>\n" +
-                "        <meta charset=\"UTF-8\">\n" +
-                "        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
-                "    </head>\n" +
-                "    <body>\n" +
-                "        <h1>Sin</h1>\n" +
-                "        <form action=\"/hello\">\n" +
-                "            <label for=\"name\">Value:</label><br>\n" +
-                "            <input type=\"number\" id=\"x\" name=\"name2\" value=\"1.570796325\"><br><br>\n" +
-                "            <input type=\"button\" value=\"Submit\" onclick=\"loadGetMsgSin()\">\n" +
-                "        </form> \n" +
-                "        <div id=\"getrespmsg\"></div>\n" +
-                "\n" +
-                "        <script>\n" +
-                "            function loadGetMsgSin() {\n" +
-                "                let nameVar = document.getElementById(\"x\").value;\n" +
-                "                const xhttp = new XMLHttpRequest();\n" +
-                "                xhttp.onload = function() {\n" +
-                "                    document.getElementById(\"getrespmsg\").innerHTML =\n" +
-                "                    this.responseText;\n" +
-                "                }\n" +
-                "                xhttp.open(\"GET\", \"/sin?id=\"+nameVar);\n" +
-                "                xhttp.send();\n" +
-                "            }\n" +
-                "        </script>\n" +
-                "\n" +
-                "        <h1>Cos</h1>\n" +
-                "        <form action=\"/hello\">\n" +
-                "            <label for=\"name\">Value:</label><br>\n" +
-                "            <input type=\"text\" id=\"x2\" name=\"name2\" value=\"1.570796325\"><br><br>\n" +
-                "            <input type=\"button\" value=\"Submit\" onclick=\"loadGetMsgCos()\">\n" +
-                "        </form> \n" +
-                "        <div id=\"getrespmsg1\"></div>\n" +
-                "\n" +
-                "        <script>\n" +
-                "            function loadGetMsgCos() {\n" +
-                "                let nameVar = document.getElementById(\"x2\").value;\n" +
-                "                const xhttp = new XMLHttpRequest();\n" +
-                "                xhttp.onload = function() {\n" +
-                "                    document.getElementById(\"getrespmsg1\").innerHTML =\n" +
-                "                    this.responseText;\n" +
-                "                }\n" +
-                "                xhttp.open(\"GET\", \"/cos?id=\"+nameVar);\n" +
-                "                xhttp.send();\n" +
-                "            }\n" +
-                "        </script>\n" +
-                "\n" +
-                "        <h1>Determinar si la cadena es palíndromo</h1>\n" +
-                "        <form action=\"/hello\">\n" +
-                "            <label for=\"name\">Palabra:</label><br>\n" +
-                "            <input type=\"text\" id=\"word\" name=\"name2\" value=\"kayak\"><br><br>\n" +
-                "            <input type=\"button\" value=\"Submit\" onclick=\"loadGetMsgPali()\">\n" +
-                "        </form> \n" +
-                "        <div id=\"getrespmsg2\"></div>\n" +
-                "\n" +
-                "        <script>\n" +
-                "            function loadGetMsgPali() {\n" +
-                "                let nameVar = document.getElementById(\"word\").value;\n" +
-                "                const xhttp = new XMLHttpRequest();\n" +
-                "                xhttp.onload = function() {\n" +
-                "                    document.getElementById(\"getrespmsg2\").innerHTML =\n" +
-                "                    this.responseText;\n" +
-                "                }\n" +
-                "                xhttp.open(\"GET\", \"/palindromo?word=\"+nameVar);\n" +
-                "                xhttp.send();\n" +
-                "            }\n" +
-                "        </script>\n" +
-                "\n" +
-                "        <h1>Magnitud de vector 2D</h1>\n" +
-                "        <form action=\"/hello\">\n" +
-                "            <label for=\"name\">X:</label><br>\n" +
-                "            <input type=\"number\" id=\"x3\" name=\"name3\" value=\"kayak\"><br><br>\n" +
-                "            <label for=\"name\">Y:</label><br>\n" +
-                "            <input type=\"number\" id=\"y3\" name=\"name4\" value=\"kayak\"><br><br>\n" +
-                "            <input type=\"button\" value=\"Submit\" onclick=\"loadGetMsgMagn()\">\n" +
-                "        </form> \n" +
-                "        <div id=\"getrespmsg3\"></div>\n" +
-                "\n" +
-                "        <script>\n" +
-                "            function loadGetMsgMagn() {\n" +
-                "                let nameVar1 = document.getElementById(\"x3\").value;\n" +
-                "                let nameVar2 = document.getElementById(\"y3\").value;\n" +
-                "                const xhttp = new XMLHttpRequest();\n" +
-                "                xhttp.onload = function() {\n" +
-                "                    document.getElementById(\"getrespmsg3\").innerHTML =\n" +
-                "                    this.responseText;\n" +
-                "                }\n" +
-                "                xhttp.open(\"GET\", \"/magnitud?x=\"+nameVar1+\"&y=\"+nameVar2);\n" +
-                "                xhttp.send();\n" +
-                "            }\n" +
-                "        </script>\n" +
-                "    </body>\n" +
-                "</html>";
+        return """
+                <html>
+                    <head>
+                        <title>Form Example</title>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    </head>
+                    <body>
+                        <h1>Sin</h1>
+                        <form action="/hello">
+                            <label for="name">Value:</label><br>
+                            <input type="number" id="x" name="name2" value="1.570796325"><br><br>
+                            <input type="button" value="Submit" onclick="loadGetMsgSin()">
+                        </form>\s
+                        <div id="getrespmsg"></div>
+
+                        <script>
+                            function loadGetMsgSin() {
+                                let nameVar = document.getElementById("x").value;
+                                const xhttp = new XMLHttpRequest();
+                                xhttp.onload = function() {
+                                    document.getElementById("getrespmsg").innerHTML =
+                                    this.responseText;
+                                }
+                                xhttp.open("GET", "/sin?id="+nameVar);
+                                xhttp.send();
+                            }
+                        </script>
+
+                        <h1>Cos</h1>
+                        <form action="/hello">
+                            <label for="name">Value:</label><br>
+                            <input type="text" id="x2" name="name2" value="1.570796325"><br><br>
+                            <input type="button" value="Submit" onclick="loadGetMsgCos()">
+                        </form>\s
+                        <div id="getrespmsg1"></div>
+
+                        <script>
+                            function loadGetMsgCos() {
+                                let nameVar = document.getElementById("x2").value;
+                                const xhttp = new XMLHttpRequest();
+                                xhttp.onload = function() {
+                                    document.getElementById("getrespmsg1").innerHTML =
+                                    this.responseText;
+                                }
+                                xhttp.open("GET", "/cos?id="+nameVar);
+                                xhttp.send();
+                            }
+                        </script>
+
+                        <h1>Determinar si la cadena es palíndromo</h1>
+                        <form action="/hello">
+                            <label for="name">Palabra:</label><br>
+                            <input type="text" id="word" name="name2" value="kayak"><br><br>
+                            <input type="button" value="Submit" onclick="loadGetMsgPali()">
+                        </form>\s
+                        <div id="getrespmsg2"></div>
+
+                        <script>
+                            function loadGetMsgPali() {
+                                let nameVar = document.getElementById("word").value;
+                                const xhttp = new XMLHttpRequest();
+                                xhttp.onload = function() {
+                                    document.getElementById("getrespmsg2").innerHTML =
+                                    this.responseText;
+                                }
+                                xhttp.open("GET", "/palindromo?word="+nameVar);
+                                xhttp.send();
+                            }
+                        </script>
+
+                        <h1>Magnitud de vector 2D</h1>
+                        <form action="/hello">
+                            <label for="name">X:</label><br>
+                            <input type="number" id="x3" name="name3" value="kayak"><br><br>
+                            <label for="name">Y:</label><br>
+                            <input type="number" id="y3" name="name4" value="kayak"><br><br>
+                            <input type="button" value="Submit" onclick="loadGetMsgMagn()">
+                        </form>\s
+                        <div id="getrespmsg3"></div>
+
+                        <script>
+                            function loadGetMsgMagn() {
+                                let nameVar1 = document.getElementById("x3").value;
+                                let nameVar2 = document.getElementById("y3").value;
+                                const xhttp = new XMLHttpRequest();
+                                xhttp.onload = function() {
+                                    document.getElementById("getrespmsg3").innerHTML =
+                                    this.responseText;
+                                }
+                                xhttp.open("GET", "/magnitud?x="+nameVar1+"&y="+nameVar2);
+                                xhttp.send();
+                            }
+                        </script>
+                    </body>
+                </html>""";
     }
 
 }
