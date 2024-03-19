@@ -1,5 +1,6 @@
 package org.escuelaing;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.client.MongoDatabase;
 import org.escuelaing.mongodb.LogDAO;
 import org.escuelaing.mongodb.MongoUtil;
@@ -7,7 +8,6 @@ import org.escuelaing.mongodb.MongoUtil;
 import static java.lang.Math.*;
 import static spark.Spark.port;
 import static spark.Spark.get;
-import static spark.Spark.delete;
 
 public class LogService {
 
@@ -44,14 +44,13 @@ public class LogService {
         });
 
         get("logs", (req,res) -> {
-            System.out.println("Legooooooooooo");
             String x = req.queryParams("msg");
             res.type("application/json");
             logsDAO.addLog(x);
-            return /*"yes" ;*/ logsDAO.getLogs();
+            return /*"yes" ;*/ new ObjectMapper().writeValueAsString(logsDAO.getLogs());
         });
 
-        delete("logs", (req,res) -> {
+        get("logsdel", (req,res) -> {
             logsDAO.deleteLogs();
             return "Logs deleted successfully";
         });
@@ -62,23 +61,16 @@ public class LogService {
         MongoDatabase database = MongoUtil.getDatabase();
         logsDAO = new LogDAO(database);
 
-        // Create a new user
-        logsDAO.addLog("John Doe");
 
-        // List users
-        logsDAO.getLogs().forEach(log -> System.out.println(log.toJson()));
 
-        // Update user
-        logsDAO.addLog("Jordy");
-
-        logsDAO.getLogs().forEach(log -> System.out.println(log.toJson()));
+        logsDAO.getLogs().forEach(System.out::println);
     }
 
     public static int getPort() {
         if (System.getenv("PORT") != null) {
             return Integer.parseInt(System.getenv("PORT"));
         }
-        return 8080;
+        return 35001;
     }
 
     public static boolean palindromo(String word) {

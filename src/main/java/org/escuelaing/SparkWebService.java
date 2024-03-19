@@ -30,28 +30,24 @@ public class SparkWebService {
     public static String roundRobin(String message) {
         currentIndex = (currentIndex + 1) % datos.length;
         System.out.println( "Servidor que antiende: "  + datos[currentIndex]);
-        return "http://" +  servers[currentIndex] + ":" + datos[currentIndex] + "/logs?msg=" + message;
+
+        //return "http://localhost:" + datos[currentIndex] + "/logs?msg=" + message;        //uso local
+        return "http://" +  servers[currentIndex] + ":" + datos[currentIndex] + "/logs?msg=" + message;     // uso en nube
     }
 
     public static String makeRequest(String url) throws IOException {
 
-        System.out.println("--------------------------------" + url);
-
-        URI uri = URI.create(url);
-        URL obj = uri.toURL();
+        URL obj = URI.create(url).toURL();
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("GET");
 
-        //The following invocation perform the connection implicitly before getting the code
         int responseCode = con.getResponseCode();
         StringBuilder response = new StringBuilder();
-        // Encabezado necesario en todas las peticiones
 
         System.out.println("GET Response Code :: " + responseCode);
 
         if (responseCode == HttpURLConnection.HTTP_OK) { // success
-            BufferedReader in = new BufferedReader(new InputStreamReader(
-                    con.getInputStream()));
+            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
             String inputLine;
 
             while ((inputLine = in.readLine()) != null) {

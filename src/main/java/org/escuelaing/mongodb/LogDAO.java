@@ -8,6 +8,8 @@ import org.bson.Document;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import static com.mongodb.client.model.Sorts.descending;
+
 public class LogDAO {
 
     private final MongoCollection<Document> logsFile;
@@ -16,19 +18,17 @@ public class LogDAO {
         logsFile = base.getCollection(MongoUtil.BASE_NAME);
     }
 
-    public boolean addLog (String logName) {
+    public void addLog (String logName) {
         try {
-            Document doc = new Document("Log", logName).append("Hour", LocalDateTime.now());
+            Document doc = new Document("Log", logName).append("Hour", LocalDateTime.now().toString());
             logsFile.insertOne(doc);
-            return true;
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            return false;
         }
     }
 
     public ArrayList<Document> getLogs() {
-        FindIterable<Document> allLogs = logsFile.find();
+        FindIterable<Document> allLogs = logsFile.find().sort(descending("Hour")).limit(10);
         ArrayList<Document> logsList = new ArrayList<>();
         allLogs.forEach(logsList::add);
         return logsList;
