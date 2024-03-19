@@ -2,10 +2,37 @@ version: '2'
 
 
 services:
+  logservice1:
+    build:
+      context: .
+      dockerfile: DockerfileLS
+    container_name: logservice1
+    environment:
+      - PORT=35001
+    ports:
+      - "35001:35001"
+  logservice2:
+    build:
+      context: .
+      dockerfile: DockerfileLS
+    container_name: logservice2
+    environment:
+      - PORT=35002
+    ports:
+      - "35002:35002"
+  logservice3:
+    build:
+      context: .
+      dockerfile: DockerfileLS
+    container_name: logservice3
+    environment:
+      - PORT=35003
+    ports:
+      - "35003:35003"
   web:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: DockerfileSP
     container_name: web
     environment:
       - PORT=45000
