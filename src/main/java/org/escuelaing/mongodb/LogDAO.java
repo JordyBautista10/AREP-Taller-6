@@ -33,4 +33,9 @@ public class LogDAO {
         allLogs.forEach(logsList::add);
         return logsList;
     }
+
+    public void deleteLogs() {
+        FindIterable<Document> allLogs = logsFile.find();
+        allLogs.forEach(logsFile::deleteOne);
+    }
 }

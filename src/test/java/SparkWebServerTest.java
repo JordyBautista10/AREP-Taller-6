@@ -1,24 +1,19 @@
-import org.escuelaing.SparkWebServer;
+import org.escuelaing.LogService;
 import org.junit.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SparkWebServerTest {
 
-    static SparkWebServer server ;
-
-    @Test
-    public void pageTestHtml(){
-        assertEquals(SparkWebServer.page().substring(0,6), "<html>");
-    }
+    static LogService server ;
 
     @Test
     public void palindromeTrueCase(){
-        assertTrue(SparkWebServer.palindromo("arenera"));
+        assertTrue(LogService.palindromo("arenera"));
     }
 
     @Test
     public void portGetCorrect(){
-        assertEquals(SparkWebServer.getPort(), 8080);
+        assertEquals(LogService.getPort(), 8080);
     }
 }
