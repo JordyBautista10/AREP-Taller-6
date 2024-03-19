@@ -11,8 +11,7 @@ import static spark.Spark.*;
 
 public class SparkWebService {
 
-    private static final String[] datos = new String[]{"35001", "35002", "35003"};
-    private static final String[] servers = new String[]{"logservice1", "logservice2", "logservice3"};
+    private static final String[] servers = new String[]{"logservice1:35001", "logservice2:35002", "logservice3:35003"};
     private static int currentIndex = 0;
 
     public static void main(String[] args) {
@@ -28,11 +27,11 @@ public class SparkWebService {
     }
 
     public static String roundRobin(String message) {
-        currentIndex = (currentIndex + 1) % datos.length;
-        System.out.println( "Servidor que antiende: "  + datos[currentIndex]);
+        currentIndex = (currentIndex + 1) % servers.length;
+        System.out.println( "Servidor que antiende: "  + servers[currentIndex]);
 
         //return "http://localhost:" + datos[currentIndex] + "/logs?msg=" + message;        //uso local
-        return "http://" +  servers[currentIndex] + ":" + datos[currentIndex] + "/logs?msg=" + message;     // uso en nube
+        return "http://" +  servers[currentIndex] + "/logs?msg=" + message;     // uso en nube
     }
 
     public static String makeRequest(String url) throws IOException {
