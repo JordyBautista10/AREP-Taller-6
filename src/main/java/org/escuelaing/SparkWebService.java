@@ -11,7 +11,7 @@ import static spark.Spark.*;
 
 public class SparkWebService {
 
-    private static final String[] servers = new String[]{"logservice1:35001", "logservice2:35002", "logservice3:35003"};
+    private static final String[] servers = new String[]{"logservice1:35000", "logservice2:35000", "logservice3:35000"};
     private static int currentIndex = 0;
 
     public static void main(String[] args) {

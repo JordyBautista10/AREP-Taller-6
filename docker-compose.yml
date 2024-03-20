@@ -7,35 +7,27 @@ services:
       context: .
       dockerfile: DockerfileLS
     container_name: logservice1
-    environment:
-      - PORT=35001
     ports:
-      - "35001:35001"
+      - "35001:35000"
   logservice2:
     build:
       context: .
       dockerfile: DockerfileLS
     container_name: logservice2
-    environment:
-      - PORT=35002
     ports:
-      - "35002:35002"
+      - "35002:35000"
   logservice3:
     build:
       context: .
       dockerfile: DockerfileLS
     container_name: logservice3
-    environment:
-      - PORT=35003
     ports:
-      - "35003:35003"
+      - "35003:35000"
   web:
     build:
       context: .
       dockerfile: DockerfileSP
     container_name: web
-    environment:
-      - PORT=45000
     ports:
       - "8080:45000"
   db:
