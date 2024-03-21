@@ -3,30 +3,22 @@ version: '2'
 
 services:
   logservice1:
-    build:
-      context: .
-      dockerfile: DockerfileLS
+    image: logservice:latest
     container_name: logservice1
     ports:
       - "35001:35000"
   logservice2:
-    build:
-      context: .
-      dockerfile: DockerfileLS
+    image: logservice:latest
     container_name: logservice2
     ports:
       - "35002:35000"
   logservice3:
-    build:
-      context: .
-      dockerfile: DockerfileLS
+    image: logservice:latest
     container_name: logservice3
     ports:
       - "35003:35000"
   web:
-    build:
-      context: .
-      dockerfile: DockerfileSP
+    image: sparkweb:latest
     container_name: web
     ports:
       - "8080:45000"

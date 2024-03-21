@@ -7,7 +7,7 @@ function loadGetMsg() {
             //document.getElementById("prestressing").innerHTML = JSON.parse(this.responseText);
         }
     };
-    xhttp.open("GET", "http://localhost:8080/logs?msg=" + msg, true);
+    xhttp.open("GET", "/logs?msg=" + msg, true);
     xhttp.send();
 }
 
