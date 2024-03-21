@@ -58,6 +58,12 @@ En primera instancia, debemos obtener el código del proyecto, por lo que se eje
 https://github.com/JordyBautista10/AREP-Taller-6.git
 ~~~
 
+Se entra a la carpeta del proyecto:
+
+~~~
+cd AREP-Taller-6
+~~~
+
 Posteriormente, descargamos las dependencias necesarias y compilamos el código
 
 ~~~
