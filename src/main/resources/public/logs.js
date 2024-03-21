@@ -4,10 +4,10 @@ function loadGetMsg() {
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             createTable(JSON.parse(this.responseText));
-            //document.getElementById("prestressing").innerHTML = JSON.parse(this.responseText);
         }
     };
-    xhttp.open("GET", "/logs?msg=" + msg, true);
+    //xhttp.open("GET", "/logs?msg=" + msg, true);                      // Para nube
+    xhttp.open("GET", "http://localhost:8080/logs?msg=" + msg, true);   // Para local
     xhttp.send();
 }
 

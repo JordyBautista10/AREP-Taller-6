@@ -11,7 +11,7 @@ import static spark.Spark.*;
 
 public class SparkWebService {
 
-    private static final String[] servers = new String[]{"logservice1:35000", "logservice2:35000", "logservice3:35000"};
+    private static final String[] servers = new String[]{"logservice1", "logservice2", "logservice3"};
     private static int currentIndex = 0;
 
     public static void main(String[] args) {
@@ -30,8 +30,8 @@ public class SparkWebService {
         currentIndex = (currentIndex + 1) % servers.length;
         System.out.println( "Servidor que antiende: "  + servers[currentIndex]);
 
-        //return "http://localhost:" + datos[currentIndex] + "/logs?msg=" + message;        //uso local
-        return "http://" +  servers[currentIndex] + "/logs?msg=" + message;     // uso en nube
+        //return "http://localhost:35001/logs?msg=" + message;        //uso sin contenedor
+        return "http://" +  servers[currentIndex] + ":35000/logs?msg=" + message;     // uso con contenedor con varios service
     }
 
     public static String makeRequest(String url) throws IOException {
