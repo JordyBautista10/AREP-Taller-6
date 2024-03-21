@@ -18,31 +18,6 @@ public class LogService {
 
         inicializarMongo();
 
-        get("sin", (req,res) -> {
-            float x = Float.parseFloat(req.queryParams("id"));
-            res.type("text/html");
-            return "Sin(" + x + ") = " + sin(x);
-        });
-
-        get("cos", (req,res) -> {
-            float x = Float.parseFloat(req.queryParams("id"));
-            res.type("text/html");
-            return "Cos(" + x + ") = " + cos(x);
-        });
-
-        get("palindromo", (req,res) -> {
-            String palabra = req.queryParams("word");
-            res.type("text/html");
-            return palabra + " es palindromo: " + palindromo(palabra);
-        });
-
-        get("magnitud", (req,res) -> {
-            Double x = Double.valueOf(req.queryParams("x"));
-            Double y = Double.valueOf(req.queryParams("y"));
-            res.type("text/html");
-            return " La magnitud de (" + x + ", " + y +") es: " + sqrt( (x*x)  +(y*y));
-        });
-
         get("logs", (req,res) -> {
             String x = req.queryParams("msg");
             res.type("application/json");
@@ -73,20 +48,6 @@ public class LogService {
         return 35001;
     }
 
-    public static boolean palindromo(String word) {
-        int left = 0;
-        int right = word.length() - 1;
 
-        word = word.toLowerCase();
-        while (left < right) {
-            if (word.charAt(left) != word.charAt(right)) {
-                return false;
-            }
-            left++;
-            right--;
-        }
-
-        return true;
-    }
 
 }
