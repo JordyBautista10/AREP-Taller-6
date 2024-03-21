@@ -24,13 +24,13 @@ Para que el código corra de forma satisfactoria y se puedan seguir todos los pa
 
 ## Diseño
 
-* MongoUtil: Se encarga de la creación de la base de datos.
+* MongoUtil: Se encarga de la conexión con la base de datos.
     ![img.png](imagenes/img_2.png)
 
-* LogDao: Se encarga de la administración de la base datos, es decir, crea, devuelve y elimina logs.
+* LogDao: Se encarga de la administración de la base datos, es decir: crea, devuelve y elimina logs.
     ![img_2.png](imagenes/img_4.png)
 
-* LogService:Se encarga de arrancar la base datos, además recibe las peticiones http y asi mismo se encarga de obtener la información que se requiere de la base de datos. 
+* LogService:Se encarga de iniciar la conexión con la base datos, además recibe las peticiones http y asi mismo se encarga de obtener la información que se requiere de la base de datos. 
     ![img.png](imagenes/img_5.png)
 
 * SparkWebsService: Se encarga recibir las peticiones http que realice el usuario, redirige las peticiones a la api de LogService, además con el método roundRobin se encarga de distribuir de manera equitativa las cargas para los servidores. 
@@ -66,8 +66,16 @@ mvn clean install compile
 
 ### Ejecución
 
+Para ejecutar docker-compose, se deben crear las imágenes con los siguientes comandos:
 
-Para correr todo este conjunto de servicios, se debe ejecutar el siguiente comando:
+~~~
+ docker build -t sparkweb -f DockerFiles/DockerfileSP .
+ ~~~
+~~~
+docker build -t logservice -f DockerFiles/DockerfileLS .
+~~~
+
+Ahora si para correr todo este conjunto de servicios, se debe ejecutar el siguiente comando:
 
 ~~~
 docker-compose up -d 
@@ -89,7 +97,7 @@ Cuando ingresa un nuevo nombre de datos, se mostrará la lista de los 10 registr
 
 ![img_1.png](imagenes/img_1.png)
 
-## Despliegue 
+#### Despliegue en AWS
 
 * [Despliegue AWS](https://youtu.be/KLmHkzMWhM0)
 
