@@ -12,6 +12,10 @@ public class MongoUtil {
 
     public static final String BASE_NAME= "logs";
 
+    private MongoUtil() {
+        // Este constructor está vacío porque no queremos que la clase se pueda instanciar.
+    }
+
     public static MongoDatabase getDatabase() {
         try (MongoClient client = MongoClients.create(DATA_BASE)) {
             return client.getDatabase(BASE_NAME);

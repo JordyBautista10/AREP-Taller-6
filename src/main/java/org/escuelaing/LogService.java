@@ -5,7 +5,6 @@ import com.mongodb.client.MongoDatabase;
 import org.escuelaing.mongodb.LogDAO;
 import org.escuelaing.mongodb.MongoUtil;
 
-import static java.lang.Math.*;
 import static spark.Spark.port;
 import static spark.Spark.get;
 
