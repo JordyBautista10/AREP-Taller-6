@@ -7,6 +7,7 @@ import org.bson.Document;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.mongodb.client.model.Sorts.descending;
 
@@ -27,7 +28,7 @@ public class LogDAO {
         }
     }
 
-    public ArrayList<Document> getLogs() {
+    public List<Document> getLogs() {
         FindIterable<Document> allLogs = logsFile.find().sort(descending("Hour")).limit(10);
         ArrayList<Document> logsList = new ArrayList<>();
         allLogs.forEach(logsList::add);
