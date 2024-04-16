@@ -12,8 +12,9 @@ public class MongoUtil {
 
     public static final String BASE_NAME= "logs";
 
-    public static MongoDatabase getDatabase(){
-        MongoClient client = MongoClients.create(DATA_BASE);
-        return client.getDatabase(BASE_NAME);
+    public static MongoDatabase getDatabase() {
+        try (MongoClient client = MongoClients.create(DATA_BASE)) {
+            return client.getDatabase(BASE_NAME);
+        }
     }
 }
