@@ -22,7 +22,7 @@ public class LogService {
             String x = req.queryParams("msg");
             res.type("application/json");
             logsDAO.addLog(x);
-            return /*"yes" ;*/ new ObjectMapper().writeValueAsString(logsDAO.getLogs());
+            return new ObjectMapper().writeValueAsString(logsDAO.getLogs());
         });
 
         get("logsdel", (req,res) -> {
